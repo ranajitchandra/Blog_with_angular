@@ -1,63 +1,86 @@
 @import 'tailwindcss';
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 /* Custom glow animations & keyframes */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
 }
 
 .animate-float {
-  animation: float 5s ease-in-out infinite;
+    animation: float 5s ease-in-out infinite;
 }
 
 .animate-pulse-slow {
-  animation: pulse-glow 6s ease-in-out infinite;
+    animation: pulse-glow 6s ease-in-out infinite;
 }
 
 /* Marquee infinite scroll keyframes */
 @keyframes marquee-left {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 @keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
 .animate-marquee-left {
-  display: flex;
-  width: max-content;
-  animation: marquee-left 35s linear infinite;
+    display: flex;
+    width: max-content;
+    animation: marquee-left 35s linear infinite;
 }
 
 .animate-marquee-right {
-  display: flex;
-  width: max-content;
-  animation: marquee-right 35s linear infinite;
+    display: flex;
+    width: max-content;
+    animation: marquee-right 35s linear infinite;
 }
 
 .marquee-speed-slow {
-  animation-duration: 55s;
+    animation-duration: 55s;
 }
 
 .marquee-speed-fast {
-  animation-duration: 20s;
+    animation-duration: 20s;
 }
 
 .marquee-container:hover .animate-marquee-left,
 .marquee-container:hover .animate-marquee-right {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
-
