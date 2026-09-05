@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TestimonialMarqueeComponent } from './testimonial-marquee.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TestimonialMarqueeComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
