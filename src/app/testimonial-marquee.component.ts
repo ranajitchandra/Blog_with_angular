@@ -2,27 +2,27 @@ import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  company: string;
-  avatar: string;
-  initials: string;
-  avatarBg: string;
-  rating: number;
-  category: 'architects' | 'developers' | 'founders';
-  quote: string;
-  highlight: string;
-  metric: string;
-  companyBadgeColor: string;
-  verified: boolean;
+    id: number;
+    name: string;
+    role: string;
+    company: string;
+    avatar: string;
+    initials: string;
+    avatarBg: string;
+    rating: number;
+    category: 'architects' | 'developers' | 'founders';
+    quote: string;
+    highlight: string;
+    metric: string;
+    companyBadgeColor: string;
+    verified: boolean;
 }
 
 @Component({
-  selector: 'app-testimonial-marquee',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-testimonial-marquee',
+    standalone: true,
+    imports: [CommonModule],
+    template: `
     <section id="testimonials" class="relative py-24 bg-slate-950 text-slate-100 overflow-hidden border-t border-slate-900">
       
       <!-- Background Ambient Glows -->
@@ -347,193 +347,193 @@ export interface Testimonial {
   `
 })
 export class TestimonialMarqueeComponent {
-  // Signals for state
-  selectedCategory = signal<string>('all');
-  currentSpeed = signal<'slow' | 'normal' | 'fast'>('normal');
-  isPaused = signal<boolean>(false);
-  showToast = signal<boolean>(false);
+    // Signals for state
+    selectedCategory = signal<string>('all');
+    currentSpeed = signal<'slow' | 'normal' | 'fast'>('normal');
+    isPaused = signal<boolean>(false);
+    showToast = signal<boolean>(false);
 
-  // Filter tab metadata
-  readonly filterTabs = [
-    { id: 'all', label: 'All Reviews', count: 8 },
-    { id: 'architects', label: 'Architects & Leads', count: 3 },
-    { id: 'developers', label: 'Senior Engineers', count: 3 },
-    { id: 'founders', label: 'CTOs & Founders', count: 2 }
-  ];
+    // Filter tab metadata
+    readonly filterTabs = [
+        { id: 'all', label: 'All Reviews', count: 8 },
+        { id: 'architects', label: 'Architects & Leads', count: 3 },
+        { id: 'developers', label: 'Senior Engineers', count: 3 },
+        { id: 'founders', label: 'CTOs & Founders', count: 2 }
+    ];
 
-  // Raw list of testimonials
-  readonly testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: 'Elena Rostova',
-      role: 'Staff Systems Architect',
-      company: 'Vercel',
-      avatar: '/avatars/avatar1.jpg',
-      initials: 'ER',
-      avatarBg: 'bg-gradient-to-tr from-indigo-500 to-purple-500',
-      rating: 5,
-      category: 'architects',
-      highlight: 'Must-read for modern web scaling',
-      quote: 'TechCraft consistently delivers deep-dive architectural breakdowns that actually translate to production velocity. The signals & state management guides saved our team weeks of debugging.',
-      metric: '⚡ 4x Dev Speed',
-      companyBadgeColor: 'bg-slate-950 text-white border-slate-700',
-      verified: true
-    },
-    {
-      id: 2,
-      name: 'Devon Vance',
-      role: 'Lead Frontend Engineer',
-      company: 'Stripe',
-      avatar: '/avatars/avatar2.jpg',
-      initials: 'DV',
-      avatarBg: 'bg-gradient-to-tr from-blue-500 to-cyan-500',
-      rating: 5,
-      category: 'developers',
-      highlight: 'Unmatched Angular 19 insights',
-      quote: 'Finding high-signal technical content on Angular v19 and Tailwind v4 used to take hours. TechCraft packages code patterns into super practical, battle-tested tutorials.',
-      metric: '📦 40% Smaller Bundle',
-      companyBadgeColor: 'bg-indigo-950/80 text-indigo-300 border-indigo-500/30',
-      verified: true
-    },
-    {
-      id: 3,
-      name: 'Maya Lin',
-      role: 'VP of Product Design',
-      company: 'Figma',
-      avatar: '/avatars/avatar3.jpg',
-      initials: 'ML',
-      avatarBg: 'bg-gradient-to-tr from-pink-500 to-rose-500',
-      rating: 5,
-      category: 'founders',
-      highlight: 'Craftsmanship at its highest level',
-      quote: 'The UX polish and component architecture breakdowns on TechCraft set the standard. It has become required reading for all senior engineers on our team.',
-      metric: '🎨 100 UX Polish',
-      companyBadgeColor: 'bg-purple-950/80 text-purple-300 border-purple-500/30',
-      verified: true
-    },
-    {
-      id: 4,
-      name: 'Marcus Thorne',
-      role: 'Co-Founder & CTO',
-      company: 'Supabase',
-      avatar: '',
-      initials: 'MT',
-      avatarBg: 'bg-gradient-to-tr from-emerald-500 to-teal-500',
-      rating: 5,
-      category: 'founders',
-      highlight: 'High signal, zero fluff',
-      quote: 'TechCraft cuts through technical noise. Their deep dives into micro-frontends and reactive state patterns changed how we architect our enterprise dashboards.',
-      metric: '🚀 99.99% Reliability',
-      companyBadgeColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30',
-      verified: true
-    },
-    {
-      id: 5,
-      name: 'Sophia Al-Mansoor',
-      role: 'Principal Engineer',
-      company: 'Cloudflare',
-      avatar: '',
-      initials: 'SA',
-      avatarBg: 'bg-gradient-to-tr from-amber-500 to-orange-500',
-      rating: 5,
-      category: 'architects',
-      highlight: 'Instant bookmark for our team',
-      quote: 'Every article feels like a masterclass written by engineers who actually deploy code to millions of users daily. Sensational clarity and code samples!',
-      metric: '🔒 Zero Edge Overhead',
-      companyBadgeColor: 'bg-amber-950/80 text-amber-300 border-amber-500/30',
-      verified: true
-    },
-    {
-      id: 6,
-      name: 'Lucas Dupont',
-      role: 'Senior Fullstack Dev',
-      company: 'Datadog',
-      avatar: '',
-      initials: 'LD',
-      avatarBg: 'bg-gradient-to-tr from-violet-600 to-indigo-600',
-      rating: 5,
-      category: 'developers',
-      highlight: 'Game-changer for performance',
-      quote: 'Implementing TechCraft’s hydration and bundle optimization tricks reduced our main thread blocking time by over 60%. Absolutely essential reading.',
-      metric: '⚡ 60% Faster TTI',
-      companyBadgeColor: 'bg-violet-950/80 text-violet-300 border-violet-500/30',
-      verified: true
-    },
-    {
-      id: 7,
-      name: 'Amara Okafor',
-      role: 'Tech Lead Engineer',
-      company: 'GitHub',
-      avatar: '',
-      initials: 'AO',
-      avatarBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600',
-      rating: 5,
-      category: 'architects',
-      highlight: 'Gold standard tech publishing',
-      quote: 'The level of rigor in code examples and performance benchmarks is rare to find today. TechCraft is a beacon of excellence in dev media.',
-      metric: '💡 100/100 Lighthouse',
-      companyBadgeColor: 'bg-slate-900 text-slate-300 border-slate-700',
-      verified: true
-    },
-    {
-      id: 8,
-      name: 'Kaito Tanaka',
-      role: 'Staff UI Engineer',
-      company: 'Sony Interactive',
-      avatar: '',
-      initials: 'KT',
-      avatarBg: 'bg-gradient-to-tr from-red-500 to-pink-600',
-      rating: 5,
-      category: 'developers',
-      highlight: 'Cleanest CSS & Signals breakdown',
-      quote: 'The Tailwind v4 integration guide was spot on. Transitioning our design token pipeline took half the estimated time thanks to TechCraft articles.',
-      metric: '🚀 50% Time Saved',
-      companyBadgeColor: 'bg-rose-950/80 text-rose-300 border-rose-500/30',
-      verified: true
+    // Raw list of testimonials
+    readonly testimonials: Testimonial[] = [
+        {
+            id: 1,
+            name: 'Elena Rostova',
+            role: 'Staff Systems Architect',
+            company: 'Vercel',
+            avatar: '/avatars/avatar1.jpg',
+            initials: 'ER',
+            avatarBg: 'bg-gradient-to-tr from-indigo-500 to-purple-500',
+            rating: 5,
+            category: 'architects',
+            highlight: 'Must-read for modern web scaling',
+            quote: 'TechCraft consistently delivers deep-dive architectural breakdowns that actually translate to production velocity. The signals & state management guides saved our team weeks of debugging.',
+            metric: '⚡ 4x Dev Speed',
+            companyBadgeColor: 'bg-slate-950 text-white border-slate-700',
+            verified: true
+        },
+        {
+            id: 2,
+            name: 'Devon Vance',
+            role: 'Lead Frontend Engineer',
+            company: 'Stripe',
+            avatar: '/avatars/avatar2.jpg',
+            initials: 'DV',
+            avatarBg: 'bg-gradient-to-tr from-blue-500 to-cyan-500',
+            rating: 5,
+            category: 'developers',
+            highlight: 'Unmatched Angular 19 insights',
+            quote: 'Finding high-signal technical content on Angular v19 and Tailwind v4 used to take hours. TechCraft packages code patterns into super practical, battle-tested tutorials.',
+            metric: '📦 40% Smaller Bundle',
+            companyBadgeColor: 'bg-indigo-950/80 text-indigo-300 border-indigo-500/30',
+            verified: true
+        },
+        {
+            id: 3,
+            name: 'Maya Lin',
+            role: 'VP of Product Design',
+            company: 'Figma',
+            avatar: '/avatars/avatar3.jpg',
+            initials: 'ML',
+            avatarBg: 'bg-gradient-to-tr from-pink-500 to-rose-500',
+            rating: 5,
+            category: 'founders',
+            highlight: 'Craftsmanship at its highest level',
+            quote: 'The UX polish and component architecture breakdowns on TechCraft set the standard. It has become required reading for all senior engineers on our team.',
+            metric: '🎨 100 UX Polish',
+            companyBadgeColor: 'bg-purple-950/80 text-purple-300 border-purple-500/30',
+            verified: true
+        },
+        {
+            id: 4,
+            name: 'Marcus Thorne',
+            role: 'Co-Founder & CTO',
+            company: 'Supabase',
+            avatar: '',
+            initials: 'MT',
+            avatarBg: 'bg-gradient-to-tr from-emerald-500 to-teal-500',
+            rating: 5,
+            category: 'founders',
+            highlight: 'High signal, zero fluff',
+            quote: 'TechCraft cuts through technical noise. Their deep dives into micro-frontends and reactive state patterns changed how we architect our enterprise dashboards.',
+            metric: '🚀 99.99% Reliability',
+            companyBadgeColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30',
+            verified: true
+        },
+        {
+            id: 5,
+            name: 'Sophia Al-Mansoor',
+            role: 'Principal Engineer',
+            company: 'Cloudflare',
+            avatar: '',
+            initials: 'SA',
+            avatarBg: 'bg-gradient-to-tr from-amber-500 to-orange-500',
+            rating: 5,
+            category: 'architects',
+            highlight: 'Instant bookmark for our team',
+            quote: 'Every article feels like a masterclass written by engineers who actually deploy code to millions of users daily. Sensational clarity and code samples!',
+            metric: '🔒 Zero Edge Overhead',
+            companyBadgeColor: 'bg-amber-950/80 text-amber-300 border-amber-500/30',
+            verified: true
+        },
+        {
+            id: 6,
+            name: 'Lucas Dupont',
+            role: 'Senior Fullstack Dev',
+            company: 'Datadog',
+            avatar: '',
+            initials: 'LD',
+            avatarBg: 'bg-gradient-to-tr from-violet-600 to-indigo-600',
+            rating: 5,
+            category: 'developers',
+            highlight: 'Game-changer for performance',
+            quote: 'Implementing TechCraft’s hydration and bundle optimization tricks reduced our main thread blocking time by over 60%. Absolutely essential reading.',
+            metric: '⚡ 60% Faster TTI',
+            companyBadgeColor: 'bg-violet-950/80 text-violet-300 border-violet-500/30',
+            verified: true
+        },
+        {
+            id: 7,
+            name: 'Amara Okafor',
+            role: 'Tech Lead Engineer',
+            company: 'GitHub',
+            avatar: '',
+            initials: 'AO',
+            avatarBg: 'bg-gradient-to-tr from-cyan-600 to-blue-600',
+            rating: 5,
+            category: 'architects',
+            highlight: 'Gold standard tech publishing',
+            quote: 'The level of rigor in code examples and performance benchmarks is rare to find today. TechCraft is a beacon of excellence in dev media.',
+            metric: '💡 100/100 Lighthouse',
+            companyBadgeColor: 'bg-slate-900 text-slate-300 border-slate-700',
+            verified: true
+        },
+        {
+            id: 8,
+            name: 'Kaito Tanaka',
+            role: 'Staff UI Engineer',
+            company: 'Sony Interactive',
+            avatar: '',
+            initials: 'KT',
+            avatarBg: 'bg-gradient-to-tr from-red-500 to-pink-600',
+            rating: 5,
+            category: 'developers',
+            highlight: 'Cleanest CSS & Signals breakdown',
+            quote: 'The Tailwind v4 integration guide was spot on. Transitioning our design token pipeline took half the estimated time thanks to TechCraft articles.',
+            metric: '🚀 50% Time Saved',
+            companyBadgeColor: 'bg-rose-950/80 text-rose-300 border-rose-500/30',
+            verified: true
+        }
+    ];
+
+    // Filtered Items computed signal
+    filteredItems = computed(() => {
+        const cat = this.selectedCategory();
+        if (cat === 'all') return this.testimonials;
+        return this.testimonials.filter(t => t.category === cat);
+    });
+
+    // Split into Row 1 & Row 2 for dual direction scrolling
+    row1Items = computed(() => {
+        const list = this.filteredItems();
+        return list.slice(0, Math.ceil(list.length / 2));
+    });
+
+    row2Items = computed(() => {
+        const list = this.filteredItems();
+        return list.slice(Math.ceil(list.length / 2));
+    });
+
+    // Duplicated list arrays to guarantee infinite uninterrupted marquee width
+    row1DisplayItems = computed(() => {
+        const r1 = this.row1Items();
+        return [...r1, ...r1, ...r1, ...r1];
+    });
+
+    row2DisplayItems = computed(() => {
+        const r2 = this.row2Items();
+        return [...r2, ...r2, ...r2, ...r2];
+    });
+
+    // Dynamic class getter for marquee animation and speed
+    getMarqueeClass(direction: 'left' | 'right'): string {
+        const speed = this.currentSpeed();
+        const baseDir = direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right';
+        const speedClass = speed === 'slow' ? 'marquee-speed-slow' : speed === 'fast' ? 'marquee-speed-fast' : '';
+        return `${baseDir} ${speedClass}`;
     }
-  ];
 
-  // Filtered Items computed signal
-  filteredItems = computed(() => {
-    const cat = this.selectedCategory();
-    if (cat === 'all') return this.testimonials;
-    return this.testimonials.filter(t => t.category === cat);
-  });
-
-  // Split into Row 1 & Row 2 for dual direction scrolling
-  row1Items = computed(() => {
-    const list = this.filteredItems();
-    return list.slice(0, Math.ceil(list.length / 2));
-  });
-
-  row2Items = computed(() => {
-    const list = this.filteredItems();
-    return list.slice(Math.ceil(list.length / 2));
-  });
-
-  // Duplicated list arrays to guarantee infinite uninterrupted marquee width
-  row1DisplayItems = computed(() => {
-    const r1 = this.row1Items();
-    return [...r1, ...r1, ...r1, ...r1];
-  });
-
-  row2DisplayItems = computed(() => {
-    const r2 = this.row2Items();
-    return [...r2, ...r2, ...r2, ...r2];
-  });
-
-  // Dynamic class getter for marquee animation and speed
-  getMarqueeClass(direction: 'left' | 'right'): string {
-    const speed = this.currentSpeed();
-    const baseDir = direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right';
-    const speedClass = speed === 'slow' ? 'marquee-speed-slow' : speed === 'fast' ? 'marquee-speed-fast' : '';
-    return `${baseDir} ${speedClass}`;
-  }
-
-  openFeedbackToast() {
-    this.showToast.set(true);
-    setTimeout(() => {
-      this.showToast.set(false);
-    }, 4000);
-  }
+    openFeedbackToast() {
+        this.showToast.set(true);
+        setTimeout(() => {
+            this.showToast.set(false);
+        }, 4000);
+    }
 }
