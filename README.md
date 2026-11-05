@@ -1,4 +1,4 @@
-# Blog with angular apps dynamic websi
+# Blog with angular apps dynamic webs
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.22.
 
