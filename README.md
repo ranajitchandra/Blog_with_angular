@@ -1,4 +1,4 @@
-# Blog with angular dynam
+# Blog with angular dyna
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.22.
 
