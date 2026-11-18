@@ -1,4 +1,4 @@
-# Blog with angular dynamic website ap
+# Blog with angular dynamic website app
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.22.
 
